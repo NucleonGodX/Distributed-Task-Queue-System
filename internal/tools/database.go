@@ -4,7 +4,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// Database collections
 type LoginDetails struct {
 	AuthToken string
 	Username  string
