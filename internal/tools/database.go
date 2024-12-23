@@ -4,7 +4,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type mockDB struct{}
 // Database collections
 type LoginDetails struct {
 	AuthToken string

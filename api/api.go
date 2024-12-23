@@ -1,35 +1,44 @@
 package api
 
 import (
-    "encoding/json"
-    "net/http"
+	"encoding/json"
+	"net/http"
 )
 
-type CoinBalanceParams struct{
-    Username string
+// Coint Balance Params
+type CoinBalanceParams struct {
+	Username string
 }
 
-type CoinBalanceResposne struct{
-    Code int
-    Balance int64
+// Coin Balance Response
+type CoinBalanceResponse struct {
+	// Success Code, Usually 200
+	Code int
+
+	// Account Balance
+	Balance int64
 }
 
-type Error struct{
-    Code int
-    Message string
+// Error Response
+type Error struct {
+	// Error code
+	Code int
+
+	// Error message
+	Message string
 }
 
-func writeError( w http.ResponseWriter, message string, code int){
-    resp:= Error{
-        Message: message,
-        Code: code,
-    }
+func writeError(w http.ResponseWriter, message string, code int) {
+	resp := Error{
+		Code:    code,
+		Message: message,
+	}
 
-    w.Header().Set("Content-Type","application/json")
-    w.WriteHeader(code)
-    json.NewEncoder(w).Encode(resp)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+
+	json.NewEncoder(w).Encode(resp)
 }
-
 
 var (
 	RequestErrorHandler = func(w http.ResponseWriter,  err error) {
